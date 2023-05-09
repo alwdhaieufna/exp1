@@ -41,7 +41,8 @@ def run_recbole(model=None, dataset=None, config_file_list=None, config_dict=Non
     dataset = create_dataset(config)
     logger.info(dataset)
 
-    # dataset splitting
+    # dataset spliiing
+    # return dataloader
     train_data, valid_data, test_data = data_preparation(config, dataset)
 
     # model loading and initialization
@@ -57,7 +58,7 @@ def run_recbole(model=None, dataset=None, config_file_list=None, config_dict=Non
         train_data, valid_data, saved=saved, show_progress=config['show_progress']
     )
 
-    # model evaluation
+    # model evaluation on test data
     test_result = trainer.evaluate(test_data, load_best_model=saved, show_progress=config['show_progress'])
 
     logger.info(set_color('best valid ', 'yellow') + f': {best_valid_result}')

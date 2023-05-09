@@ -180,9 +180,9 @@ class SASCTS(SequentialRecommender):
         return output  # [B H]
 
     def calculate_loss(self, interaction):
-        item_seq = interaction[self.ITEM_SEQ]   #N * L
+        item_seq = interaction[self.ITEM_SEQ]   #N (batch sixe) * L (max seq len)
         item_seq_len = interaction[self.ITEM_SEQ_LEN]
-        seq_output = self.forward(item_seq, item_seq_len)  # N * D
+        seq_output = self.forward(item_seq, item_seq_len)  # N * D (embedding dimesion)
         pos_items = interaction[self.POS_ITEM_ID]
         if self.loss_type == 'BPR':
             neg_items = interaction[self.NEG_ITEM_ID]
@@ -199,7 +199,7 @@ class SASCTS(SequentialRecommender):
 
         raw_seq_output = self.forward(item_seq, item_seq_len)
 
-        
+        # dropout can act as a data augmentation
         if self.config['aug'] == 'self':
             cts_seq_output = self.forward(item_seq, item_seq_len)
         else:

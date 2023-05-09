@@ -89,7 +89,8 @@ class Trainer(AbstractTrainer):
         self.valid_metric_bigger = config['valid_metric_bigger']
         self.test_batch_size = config['eval_batch_size']
         self.gpu_available = torch.cuda.is_available() and config['use_gpu']
-        self.device = config['device']
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        # self.device = config['device']
         self.checkpoint_dir = config['checkpoint_dir']
         ensure_dir(self.checkpoint_dir)
         saved_model_file = '{}-{}.pth'.format(self.config['model'], get_local_time())
@@ -175,6 +176,8 @@ class Trainer(AbstractTrainer):
                 desc=set_color(f"Train {epoch_idx:>5}", 'pink'),
             ) if show_progress else train_data
         )
+        
+        print("device: ", self.device)
         for batch_idx, interaction in enumerate(iter_data):
             interaction = interaction.to(self.device)
             self.optimizer.zero_grad()
