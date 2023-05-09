@@ -1,16 +1,15 @@
 ![RecBole Logo](asset/logo.png)
 
---------------------------------------------------------------------------------
+---
 
-# RecBole (伯乐)
+# RecBole (伯乐-private)
 
-*“世有伯乐，然后有千里马。千里马常有，而伯乐不常有。”——韩愈《马说》*
+_“世有伯乐，然后有千里马。千里马常有，而伯乐不常有。”——韩愈《马说》_
 
 [![PyPi Latest Release](https://img.shields.io/pypi/v/recbole)](https://pypi.org/project/recbole/)
 [![Conda Latest Release](https://anaconda.org/aibox/recbole/badges/version.svg)](https://anaconda.org/aibox/recbole)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![arXiv](https://img.shields.io/badge/arXiv-RecBole-%23B21B1B)](https://arxiv.org/abs/2011.01731)
-
 
 [HomePage] | [Docs] | [Datasets] | [Paper] | [Blogs] | [中文版]
 
@@ -25,15 +24,14 @@ RecBole is developed based on Python and PyTorch for reproducing and developing 
 comprehensive and efficient framework for research purpose.
 Our library includes 78 recommendation algorithms, covering four major categories:
 
-+ General Recommendation
-+ Sequential Recommendation
-+ Context-aware Recommendation
-+ Knowledge-based Recommendation
+- General Recommendation
+- Sequential Recommendation
+- Context-aware Recommendation
+- Knowledge-based Recommendation
 
 We design a unified and flexible data file format, and provide the support for 28 benchmark recommendation datasets.
 A user can apply the provided script to process the original data copy, or simply download the processed datasets
 by our team.
-
 
 <p align="center">
   <img src="asset/framework.png" alt="RecBole v0.1 architecture" width="600">
@@ -41,22 +39,22 @@ by our team.
   <b>Figure</b>: RecBole Overall Architecture
 </p>
 
-
 ## Feature
-+ **General and extensible data structure.** We design general and extensible data structures to unify the formatting and
-usage of various recommendation datasets.
 
-+ **Comprehensive benchmark models and datasets.** We implement 78 commonly used recommendation algorithms, and provide
-the formatted copies of 28 recommendation datasets.
+- **General and extensible data structure.** We design general and extensible data structures to unify the formatting and
+  usage of various recommendation datasets.
 
-+ **Efficient GPU-accelerated execution.** We optimize the efficiency of our library with a number of improved techniques
-oriented to the GPU environment.
+- **Comprehensive benchmark models and datasets.** We implement 78 commonly used recommendation algorithms, and provide
+  the formatted copies of 28 recommendation datasets.
 
-+ **Extensive and standard evaluation protocols.** We support a series of widely adopted evaluation protocols or settings
-for testing and comparing recommendation algorithms.
+- **Efficient GPU-accelerated execution.** We optimize the efficiency of our library with a number of improved techniques
+  oriented to the GPU environment.
 
+- **Extensive and standard evaluation protocols.** We support a series of widely adopted evaluation protocols or settings
+  for testing and comparing recommendation algorithms.
 
 ## RecBole News
+
 **02/25/2022**: We release RecBole [v1.0.1](https://github.com/RUCAIBox/RecBole/releases/tag/v1.0.1).
 
 **09/17/2021**: We release RecBole [v1.0.0](https://github.com/RUCAIBox/RecBole/releases/tag/v1.0.0).
@@ -65,7 +63,7 @@ for testing and comparing recommendation algorithms.
 
 **01/15/2021**: We release RecBole [v0.2.0](https://github.com/RUCAIBox/RecBole/releases/tag/v0.2.0).
 
-**12/10/2020**: 我们发布了[RecBole小白入门系列中文博客（持续更新中）](https://blog.csdn.net/Turinger_2000/article/details/111182852) 。
+**12/10/2020**: 我们发布了[RecBole 小白入门系列中文博客（持续更新中）](https://blog.csdn.net/Turinger_2000/article/details/111182852) 。
 
 **12/06/2020**: We release RecBole [v0.1.2](https://github.com/RUCAIBox/RecBole/releases/tag/v0.1.2).
 
@@ -75,13 +73,13 @@ for reference.
 
 **11/03/2020**: We release the first version of RecBole **v0.1.1**.
 
-
 ## Installation
+
 RecBole works with the following operating systems:
 
-* Linux
-* Windows 10
-* macOS X
+- Linux
+- Windows 10
+- macOS X
 
 RecBole requires Python version 3.7 or later.
 
@@ -102,12 +100,14 @@ pip install recbole
 ```
 
 ### Install from source
+
 ```bash
 git clone https://github.com/RUCAIBox/RecBole.git && cd RecBole
 pip install -e . --verbose
 ```
 
 ## Quick-Start
+
 With the source code, you can use the provided script for initial usage of our library:
 
 ```bash
@@ -160,7 +160,7 @@ INFO test result:
 recall@10: 0.2368  mrr@10: 0.4519  ndcg@10: 0.2768  hit@10: 0.7614  precision@10: 0.1901
 ```
 
-If you want to change the parameters, such as ``learning_rate``, ``embedding_size``, just set the additional command
+If you want to change the parameters, such as `learning_rate`, `embedding_size`, just set the additional command
 parameters as you need:
 
 ```bash
@@ -173,56 +173,63 @@ If you want to change the models, just run the script by setting additional comm
 python run_recbole.py --model=[model_name]
 ```
 
-### Auto-tuning Hyperparameter 
-Open `RecBole/hyper.test` and set several hyperparameters to auto-searching in parameter list. The following has two ways to search best hyperparameter:
-* **loguniform**: indicates that the parameters obey the uniform distribution, randomly taking values from e^{-8} to e^{0}.
-* **choice**: indicates that the parameter takes discrete values from the setting list.
+### Auto-tuning Hyperparameter
 
-Here is an example for `hyper.test`: 
+Open `RecBole/hyper.test` and set several hyperparameters to auto-searching in parameter list. The following has two ways to search best hyperparameter:
+
+- **loguniform**: indicates that the parameters obey the uniform distribution, randomly taking values from e^{-8} to e^{0}.
+- **choice**: indicates that the parameter takes discrete values from the setting list.
+
+Here is an example for `hyper.test`:
+
 ```
 learning_rate loguniform -8, 0
 embedding_size choice [64, 96 , 128]
 train_batch_size choice [512, 1024, 2048]
 mlp_hidden_size choice ['[64, 64, 64]','[128, 128]']
 ```
+
 Set training command parameters as you need to run:
+
 ```
 python run_hyper.py --model=[model_name] --dataset=[data_name] --config_files=xxxx.yaml --params_file=hyper.test
 e.g.
 python run_hyper.py --model=BPR --dataset=ml-100k --config_files=test.yaml --params_file=hyper.test
 ```
+
 Note that `--config_files=test.yaml` is optional, if you don't have any customize config settings, this parameter can be empty.
 
 This processing maybe take a long time to output best hyperparameter and result:
+
 ```
-running parameters:                                                                                                                    
-{'embedding_size': 64, 'learning_rate': 0.005947474154838498, 'mlp_hidden_size': '[64,64,64]', 'train_batch_size': 512}                
+running parameters:
+{'embedding_size': 64, 'learning_rate': 0.005947474154838498, 'mlp_hidden_size': '[64,64,64]', 'train_batch_size': 512}
   0%|                                                                                           | 0/18 [00:00<?, ?trial/s, best loss=?]
 ```
 
 More information about parameter tuning can be found in our [docs](https://recbole.io/docs/user_guide/usage/parameter_tuning.html).
 
-
 ## Time and Memory Costs
-We constructed preliminary experiments to test the time and memory cost on three different-sized datasets 
+
+We constructed preliminary experiments to test the time and memory cost on three different-sized datasets
 (small, medium and large). For detailed information, you can click the following links.
 
-* [General recommendation models](asset/time_test_result/General_recommendation.md)
-* [Sequential recommendation models](asset/time_test_result/Sequential_recommendation.md)
-* [Context-aware recommendation models](asset/time_test_result/Context-aware_recommendation.md)
-* [Knowledge-based recommendation models](asset/time_test_result/Knowledge-based_recommendation.md)
+- [General recommendation models](asset/time_test_result/General_recommendation.md)
+- [Sequential recommendation models](asset/time_test_result/Sequential_recommendation.md)
+- [Context-aware recommendation models](asset/time_test_result/Context-aware_recommendation.md)
+- [Knowledge-based recommendation models](asset/time_test_result/Knowledge-based_recommendation.md)
 
 NOTE: Our test results only gave the approximate time and memory cost of our implementations in the RecBole library
-(based on our machine server).  Any feedback or suggestions about the implementations and test are welcome. 
+(based on our machine server). Any feedback or suggestions about the implementations and test are welcome.
 We will keep improving our implementations, and update these test results.
 
-
 ## RecBole Major Releases
-| Releases  | Date   |
-|-----------|--------|
-| v1.0.0    | 09/17/2021 |
-| v0.2.0    | 01/15/2021 |
-| v0.1.1    | 11/03/2020 |
+
+| Releases | Date       |
+| -------- | ---------- |
+| v1.0.0   | 09/17/2021 |
+| v0.2.0   | 01/15/2021 |
+| v0.1.1   | 11/03/2020 |
 
 ## Contributing
 
@@ -237,6 +244,7 @@ We thank the insightful suggestions from [@tszumowski](https://github.com/tszumo
 We thank the nice contributions through PRs from [@rowedenny](https://github.com/rowedenny)，[@deklanw](https://github.com/deklanw) et.al.
 
 ## Cite
+
 If you find RecBole useful for your research or development, please cite the following [paper](https://arxiv.org/abs/2011.01731):
 
 ```
@@ -249,15 +257,16 @@ If you find RecBole useful for your research or development, please cite the fol
 ```
 
 ## The Team
+
 RecBole is developed and maintained by [RUC, BUPT, ECNU](https://www.recbole.io/about.html).
 
 Here is the list of our lead developers in each development phase. They are the souls of RecBole and have made outstanding contributions.
 
-|         Time          |        Version         |                Lead Developers                 |
-| :-------------------: | :--------------------: | :--------------------------------------------: |
-| June 2020<br> ~<br> Nov. 2020 |        v0.1.1         |  Shanlei Mu ([@ShanleiMu](https://github.com/ShanleiMu)), Yupeng Hou ([@hyp1231](https://github.com/hyp1231)),<br> Zihan Lin ([@linzihan-backforward](https://github.com/linzihan-backforward)), Kaiyuan Li ([@tsotfsk](https://github.com/tsotfsk))|
-|    Nov. 2020<br> ~ <br> now    |  v0.1.2 ~ v1.0.0 |      Yushuo Chen ([@chenyushuo](https://github.com/https://github.com/chenyushuo)), Xingyu Pan ([@2017pxy](https://github.com/2017pxy))    |
-
+|             Time              |     Version     |                                                                                                                   Lead Developers                                                                                                                   |
+| :---------------------------: | :-------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| June 2020<br> ~<br> Nov. 2020 |     v0.1.1      | Shanlei Mu ([@ShanleiMu](https://github.com/ShanleiMu)), Yupeng Hou ([@hyp1231](https://github.com/hyp1231)),<br> Zihan Lin ([@linzihan-backforward](https://github.com/linzihan-backforward)), Kaiyuan Li ([@tsotfsk](https://github.com/tsotfsk)) |
+|   Nov. 2020<br> ~ <br> now    | v0.1.2 ~ v1.0.0 |                                                         Yushuo Chen ([@chenyushuo](https://github.com/https://github.com/chenyushuo)), Xingyu Pan ([@2017pxy](https://github.com/2017pxy))                                                          |
 
 ## License
+
 RecBole uses [MIT License](./LICENSE).
