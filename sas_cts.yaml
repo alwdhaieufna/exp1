@@ -12,7 +12,7 @@ save_dataloaders: False
 
 # training settings
 epochs: 300
-train_batch_size: 64
+train_batch_size: 2048
 learner: adam
 learning_rate: 0.001
 neg_sampling:
@@ -47,7 +47,7 @@ metrics: ["Recall", "MRR", "NDCG", "Hit", "Precision"]
 topk: [10]
 valid_metric: MRR@10
 valid_metric_bigger: True
-eval_batch_size: 64
+eval_batch_size: 4096
 loss_decimal_place: 4
 metric_decimal_place: 4
 

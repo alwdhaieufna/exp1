@@ -97,12 +97,14 @@ def init_logger(config):
     else:
         level = logging.INFO
 
+    # the logger will output to the file
     fh = logging.FileHandler(logfilepath)
     fh.setLevel(level)
     fh.setFormatter(fileformatter)
     remove_color_filter = RemoveColorFilter()
     fh.addFilter(remove_color_filter)
 
+    # the logger will output to the terminal
     sh = logging.StreamHandler()
     sh.setLevel(level)
     sh.setFormatter(sformatter)

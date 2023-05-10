@@ -163,6 +163,11 @@ class SASCTS(SequentialRecommender):
             module.bias.data.zero_()
 
     def forward(self, item_seq, item_seq_len):
+        '''
+        args:
+            item_seq: [B, L] (batch_size, max_len)
+            item_seq_len: [B] (actual length of each sequence) 
+        '''
         position_ids = torch.arange(item_seq.size(1), dtype=torch.long, device=item_seq.device)
         position_ids = position_ids.unsqueeze(0).expand_as(item_seq)
         position_embedding = self.position_embedding(position_ids)
@@ -175,12 +180,13 @@ class SASCTS(SequentialRecommender):
         extended_attention_mask = self.get_attention_mask(item_seq) 
 
         trm_output = self.trm_encoder(input_emb, extended_attention_mask, output_all_encoded_layers=True)
+        # since we return all encoder layers output, we need to gather the last one
         output = trm_output[-1]
         output = self.gather_indexes(output, item_seq_len - 1)
         return output  # [B H]
 
     def calculate_loss(self, interaction):
-        item_seq = interaction[self.ITEM_SEQ]   #N (batch sixe) * L (max seq len)
+        item_seq = interaction[self.ITEM_SEQ]   #N (batch size) * L (max seq len)
         item_seq_len = interaction[self.ITEM_SEQ_LEN]
         seq_output = self.forward(item_seq, item_seq_len)  # N * D (embedding dimesion)
         pos_items = interaction[self.POS_ITEM_ID]
