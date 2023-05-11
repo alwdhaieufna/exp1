@@ -194,7 +194,7 @@ class Trainer(AbstractTrainer):
             if self.clip_grad_norm:
                 clip_grad_norm_(self.model.parameters(), **self.clip_grad_norm)
             self.optimizer.step()
-            iter_data.set_description(f"epoch {epoch_idx:>5} | loss: {loss.item():.5f}")
+            # iter_data.set_description(f"epoch {epoch_idx:>5} | loss: {loss.item():.5f}")
             if self.gpu_available and show_progress:
                 iter_data.set_postfix_str(set_color('GPU RAM: ' + get_gpu_usage(self.device), 'yellow'))
         return total_loss
